@@ -1,0 +1,31 @@
+{
+  "name": "issue13319",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/",
+    "start": "node src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brentgroves/issue13319.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brentgroves/issue13319/issues"
+  },
+  "homepage": "https://github.com/brentgroves/issue13319#readme",
+  "dependencies": {
+    "@bgroves/common": "^1.3.0",
+    "@microsoft/microsoft-graph-client": "^2.2.1",
+    "axios": "^0.21.1",
+    "docx": "^5.5.0",
+    "isomorphic-fetch": "^3.0.0",
+    "mqtt": "^4.2.6",
+    "qs": "^6.9.6"
+  }
+}
