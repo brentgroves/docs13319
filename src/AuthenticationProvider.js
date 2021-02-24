@@ -25,22 +25,15 @@ class AuthenticationProvider {
     axios.defaults.headers.post["Content-Type"] =
       "application/x-www-form-urlencoded";
     try {
-      let response = await axios.post(url, qs.stringify(body))
+      let response = await axios.post(url, qs.stringify(body));
 
       if (response.status == 200) {
-
-          return response.data.access_token;
-
+        return response.data.access_token;
       } else {
-
-          throw new Error("Non 200OK response on obtaining token...")
-
+        throw new Error("Non 200OK response on obtaining token...");
       }
-    }
-    catch (error) {
-
-        throw new Error("Error on obtaining token...")
-
+    } catch (error) {
+      throw new Error("Error on obtaining token...");
     }
   }
 }

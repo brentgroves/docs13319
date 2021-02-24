@@ -4,27 +4,36 @@ const common = require("@bgroves/common");
 
 const GetClient = require("./GetClient");
 const CreateFolder = require("./CreateFolder");
-const GenIssueProps = require('./GenIssueProps');
+const GenIssueProps = require("./GenIssueProps");
 const CreateDoc = require(`./CreateDoc`);
 const UploadDoc = require(`./UploadDoc`);
+const ProcessIssue = require("./ProcessIssue");
 var mqttClient;
 
-
+var { MQTT_SERVER, MQTT_PORT } = process.env;
 
 async function main() {
-  console.log(`in issue.main`);
-  let groupId =  '3f29dd5d-9118-4747-b72f-c086ab22d7bb';
-  let issueFolderId =  '016VYMZDHXQMYFPTGIVZAZNILZIQP2RTU6';
+  try {
+    common.log(`Starting issue13319`);
+    common.log(`MQTT_SERVER=${MQTT_SERVER},MQTT_PORT=${MQTT_PORT}`);
+    const mqttClient = mqtt.connect(`mqtt://${MQTT_SERVER}:${MQTT_PORT}`);
 
-  let cnc = '103';
-  const {issueName,formatDateTime}=GenIssueProps();
-  console.log(`groupId: ${groupId},issueFolderId: ${issueFolderId}`);
-  let client = GetClient();
-  let docName = await CreateDoc({issueName,cnc,formatDateTime});
-  // console.log(`docName: ${docName}`);
-  let subFolderId = await CreateFolder({client,groupId,issueFolderId,issueName});
-  let docId = await UploadDoc({client,groupId,subFolderId,docName});
-  console.log(`docId: ${docId}`);
+    mqttClient.on("connect", function () {
+      mqttClient.subscribe("CreateIssueDoc", function (err) {
+        if (!err) {
+          common.log("issue13319 subscribed to: CreateIssueDoc");
+        }
+      });
+    });
+    // message is a buffer
+    mqttClient.on("message", function (topic, message) {
+      const p = JSON.parse(message.toString()); // payload is a buffer
+      common.log(`issue13319.mqtt=>${message.toString()}`);
+      ProcessIssue();
+    });
+  } catch (e) {
+    console.error(e.name + ": " + e.message);
+  }
 }
 main();
 /*
