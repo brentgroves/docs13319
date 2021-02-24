@@ -1,13 +1,18 @@
 const axios = require("axios");
 const qs = require("qs");
-
 const APP_ID = "b5615dbe-0af5-49fd-ab09-803e91be7bd9";
 const APP_SECERET = "L9c1qlg8x1CfH8StSyfVtkB23vD-C~-.x.";
+
+/* 
+uncomment this section after rights have been approved
+const APP_ID = "f2809f71-2041-4796-9e90-0f2beb6d520e";
+const APP_SECERET = "Lm~eih6mtou0Rt-~a73vJg-IOXZl.J0tR_";
+*/
 const TOKEN_ENDPOINT =
   "https://login.microsoftonline.com/b4b87e8f-df64-41ff-9ba4-a4930ebc804b/oauth2/v2.0/token";
 const MS_GRAPH_SCOPE = "https://graph.microsoft.com/.default";
 
-class ClientCredentialAuthenticationProvider {
+class AuthenticationProvider {
   async getAccessToken() {
     const url = TOKEN_ENDPOINT;
 
@@ -39,4 +44,4 @@ class ClientCredentialAuthenticationProvider {
     }
   }
 }
-module.exports = ClientCredentialAuthenticationProvider;
+module.exports = AuthenticationProvider;
