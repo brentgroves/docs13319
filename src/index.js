@@ -14,21 +14,21 @@ var { MQTT_SERVER, MQTT_PORT } = process.env;
 
 async function main() {
   try {
-    common.log(`Starting issue13319`);
+    common.log(`Starting docs3319`);
     common.log(`MQTT_SERVER=${MQTT_SERVER},MQTT_PORT=${MQTT_PORT}`);
     const mqttClient = mqtt.connect(`mqtt://${MQTT_SERVER}:${MQTT_PORT}`);
 
     mqttClient.on("connect", function () {
-      mqttClient.subscribe("CreateIssueDoc", function (err) {
+      mqttClient.subscribe("CreateIssueDocs", function (err) {
         if (!err) {
-          common.log("issue13319 subscribed to: CreateIssueDoc");
+          common.log("issue13319 subscribed to: CreateIssueDocs");
         }
       });
     });
     // message is a buffer
     mqttClient.on("message", function (topic, message) {
       const p = JSON.parse(message.toString()); // payload is a buffer
-      common.log(`issue13319.mqtt=>${message.toString()}`);
+      common.log(`docs13319.mqtt=>${message.toString()}`);
       ProcessIssue();
     });
   } catch (e) {

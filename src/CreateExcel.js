@@ -1,9 +1,15 @@
 const Excel = require('exceljs');
+const common = require("@bgroves/common");
 
 module.exports = async function ({ issueName, cnc, formatDateTime }) {
+
+  const docName = `${issueName}.xlsx`;  
+  common.log(`CreateExcel.docName=${docName}`);
+
   // construct a streaming XLSX workbook writer with styles and shared strings
   const options = {
-    filename: "./streamed-workbook.xlsx",
+    filename: `./${docName}`,
+    // filename: "./streamed-workbook.xlsx",
     useStyles: true,
     useSharedStrings: true,
   };
@@ -56,4 +62,4 @@ module.exports = async function ({ issueName, cnc, formatDateTime }) {
   await workbook.commit();
   // ... the stream has been written
 }
-main();
+// main();
