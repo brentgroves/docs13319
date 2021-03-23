@@ -60,6 +60,7 @@ module.exports = async function ({ issueName, cnc, formatDateTime }) {
 
   // Finished the workbook.
   await workbook.commit();
+  return docName;
   // ... the stream has been written
 }
 // main();

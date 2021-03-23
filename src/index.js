@@ -28,8 +28,15 @@ async function main() {
     // message is a buffer
     mqttClient.on("message", function (topic, message) {
       const p = JSON.parse(message.toString()); // payload is a buffer
-      common.log(`docs13319.mqtt=>${message.toString()}`);
-      ProcessIssue();
+      common.log(`docs13319.mqtt=>${message.toString()}`); 
+      // const msg = 
+      // { 
+      //   subFolderId: "016VYMZDDN5LDCF4BHZRF2DUT2ZORNTAKX"
+      //   // subFolderId
+      // } 
+    
+      // let msgString = JSON.stringify(msg);      
+      ProcessIssue({mqttClient});
     });
   } catch (e) {
     console.error(e.name + ": " + e.message);
